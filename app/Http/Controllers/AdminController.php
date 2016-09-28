@@ -15,16 +15,9 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
-    private function isAdmin(){
-        $user = Auth::user()->is_admin;
-        if($user)
-            return true;
-        else
-            return false;
-    }
 
     public function dashboard(){
-        if($this->isAdmin()){
+        if(Auth::user()->checkAdmin()){
             return view('admin.top');
         } else{
             return abort(403, 'Forbitten!');
