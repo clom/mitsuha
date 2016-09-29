@@ -31,12 +31,13 @@
                             @endif
 
                             <td>{{ $row->created_at }}</td>
-                            <td><input type="button" class="btn btn-default" onclick="location.href='{{url('/admin/view/'.$row->id)}}'"value="確認">
-                                {!! Form::open(['action' => 'AdminController@available', 'class' => 'form-horizontal']) !!}
+                            <td>
+                                <input type="button" class="btn btn-default" onclick="location.href='{{url('/admin/view/'.$row->id)}}'"value="確認">
+                                {!! Form::open(['action' => 'AdminController@available', 'class' => 'form-horizontal', 'style' => 'display: inline']) !!}
                                 {{Form::hidden('nameid', $row->id)}}
                                 {{Form::submit('変更', ['class' => 'btn btn-info'])}}
                                 {!! Form::close() !!}
-                                </td>
+                            </td>
                         </tr>
                 @endforeach
             </div>

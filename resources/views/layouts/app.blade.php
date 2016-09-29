@@ -17,7 +17,21 @@
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
-        ]); ?>
+        ]); ?>;
+
+        function clock1 () {
+            var nowTime = new Date();
+            var nowYear = nowTime.getFullYear();
+            var nowMonth = nowTime.getMonth() + 1;
+            var nowdate = nowTime.getDate();
+            var nowHour = nowTime.getHours();
+            var nowMin = nowTime.getMinutes();
+            var nowSec = nowTime.getSeconds();
+            var msg =  nowYear + '年' + nowMonth + '月' + nowdate + '日' + nowHour + ':' + nowMin + ':' + nowSec;
+            $('#clock').text(msg);
+        }
+
+        setInterval('clock1()',1000);
     </script>
 </head>
 <body>
@@ -42,7 +56,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    <li ><a href="#" id="clock">clock</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -50,7 +64,6 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
