@@ -11,11 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// guest
+Route::get('/', 'AttendController@index');
+Route::get('/attend/{id}', 'AttendController@Attend');
+
+// admin
 Route::get('/admin', 'AdminController@dashboard');
+Route::get('/admin/attend', 'AdminController@addAttend');
+Route::get('/admin/view/{id}', 'AdminController@viewAttend');
+Route::get('/admin/view', 'AdminController@ListAttend');
+
+// admin api
+Route::post('/admin/attend/add', 'AdminController@add');
+Route::post('/admin/available', 'AdminController@available');
+

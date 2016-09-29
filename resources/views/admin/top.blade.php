@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminhead')
 
 @section('content')
 <div class="container">
@@ -9,6 +9,9 @@
 
                 <div class="panel-body">
                     Welcome to Admin Area!
+                    <hr>
+                    <h2>現在時刻</h2>
+                    <p id="clock">time</p>
                 </div>
             </div>
         </div>
