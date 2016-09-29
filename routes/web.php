@@ -30,4 +30,6 @@ Route::get('/admin/view', 'AdminController@ListAttend');
 // admin api
 Route::post('/admin/attend/add', 'AdminController@add');
 Route::post('/admin/available', 'AdminController@available');
+Route::post('/attend/check', 'AttendController@register');
+
 

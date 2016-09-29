@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Student_attendee;
 use Illuminate\Http\Request;
 
 use App\Attend;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Response;
 use App\Http\Requests;
 
 class AttendController extends Controller
@@ -18,12 +21,44 @@ class AttendController extends Controller
     public function index()
     {
         $attend = Attend::where('available', 1)->get();
-        return view('index', ['data' => $attend]);
+        $value = Cookie::get('student_class');
+        $length = 6;
+        if ($value == null) {
+            $value = substr(base_convert(md5(uniqid()), 16, 36), 0, $length);
+        }
+
+        //$cookie = Cookie::make('student_class', $value , 300);
+        //return view('index', ['data' => $attend])->withCookie($cookie);
+        $response = new Response(view('index', ['data' => $attend]));
+        $response->withCookie(Cookie('student_class', $value , 300));
+        return $response;
     }
 
     public function attend($id)
     {
+        $attend = Attend::find($id);
+        $attendee = Student_attendee::all();
+        $value = Cookie::get('student_class');
+        if($value == null)
+            return redirect('/');
 
+        return view('view', ['data' => $attend, 'st_code' => $value, 'student' => $attendee]);
+
+    }
+
+    public function register(Requests\AttendeeRequest $req){
+        $attend = new Student_attendee();
+        $attend_class = Attend::find($req->input('class_id'));
+        $attend->setStudentId($req->input('student_id'));
+        $attend->setClassId($req->input('class_id'));
+        $attend->setStudentname($req->input('student_name'));
+        $attend->setSession($req->input('session_code'));
+        if($attend_class->getKeyword() == $req->input('keyword'))
+            $attend->save();
+        else
+            return redirect('/attend/'.$req->input('class_id'));
+
+        return redirect('/');
     }
 
 }
