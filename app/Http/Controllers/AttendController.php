@@ -64,7 +64,7 @@ class AttendController extends Controller
         else
             return redirect('/attend/'.$req->input('class_id'));
 
-        return redirect('/');
+        return redirect('/attend/'.$req->input('class_id'));
     }
 
 }
