@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attend;
+use App\Student_attendee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +60,8 @@ class AdminController extends Controller
 
     public function viewAttend($id){
         $attend = Attend::find($id);
-        return view('admin.view', ['data' => $attend]);
+        $attendee = Student_attendee::where('class_id', $id)->get();
+        return view('admin.view', ['data' => $attend, 'student' => $attendee]);
     }
 
     public function ListAttend(){

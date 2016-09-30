@@ -21,6 +21,20 @@
                 @endif
 
             </div>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>学生番号</th>
+                    <th>名前</th>
+                    <th>打刻時刻</th>
+                </tr>
+                @foreach($student as $row)
+                    <tr>
+                        <td>{{ $row->student_id }}</td>
+                        <td>{{ $row->student_name }}</td>
+                        <td>{{ $row->created_at }}</td>
+                    </tr>
+                @endforeach
+            </table>
         </div>
     </div>
 </div>
