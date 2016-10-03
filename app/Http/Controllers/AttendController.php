@@ -36,7 +36,12 @@ class AttendController extends Controller
 
     public function attend($id)
     {
-        $attend = Attend::find($id);
+        if(Attend::where('id', $id)->where('available', true)->exists()){
+            $attend = Attend::find($id);
+        }
+        else{
+            return redirect('/');
+        }
         $attendee = Student_attendee::where('class_id', $id)->get();
         $value = Cookie::get('student_class');
 
