@@ -72,4 +72,14 @@ class AttendController extends Controller
         return redirect('/attend/'.$req->input('class_id'));
     }
 
+    public function getAttend($id){
+        if(Attend::where('id', $id)->where('available', true)->exists()){
+            $attendee = Student_attendee::where('class_id', $id)->get();
+        }
+        else{
+            return abort(404, 'Not Found');
+        }
+        return response()->json($attendee);
+    }
+
 }

@@ -31,5 +31,6 @@ Route::get('/admin/view', 'AdminController@ListAttend');
 Route::post('/admin/attend/add', 'AdminController@add');
 Route::post('/admin/available', 'AdminController@available');
 Route::post('/attend/check', 'AttendController@register');
+Route::get('/get/attend/{id}', 'AttendController@getAttend');
 
 
