@@ -1,7 +1,7 @@
 @extends('layouts.adminhead')
 
 @section('content')
-<div class="container">
+    <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -22,20 +22,38 @@
 
             </div>
             <table class="table table-striped table-bordered">
+                <thead>
                 <tr>
                     <th>学生番号</th>
                     <th>名前</th>
                     <th>打刻時刻</th>
                 </tr>
-                @foreach($student as $row)
-                    <tr>
-                        <td>{{ $row->student_id }}</td>
-                        <td>{{ $row->student_name }}</td>
-                        <td>{{ $row->created_at }}</td>
-                    </tr>
-                @endforeach
+                </thead>
+                <tbody id="attendee">
+
+                </tbody>
             </table>
         </div>
     </div>
 </div>
+
+    <script>
+        function getAttendee() {
+            $.ajax({
+                type: 'get',
+                url: '/get/attend/{{$data->id}}',
+                dataType: 'json',
+                success: function (data) {
+                    var attend_table = '';
+                    data.forEach(function(student){
+                        attend_table = attend_table + '<tr><td>'+student.student_id+'</td><td>'+student.student_name+'</td><td>'+student.created_at+'</td></tr>';
+                        $('#attendee').html(attend_table);
+                    });
+                }
+            });
+        }
+
+        setInterval('getAttendee()', 1000);
+
+    </script>
 @endsection
