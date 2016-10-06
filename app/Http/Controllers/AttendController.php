@@ -73,7 +73,7 @@ class AttendController extends Controller
     }
 
     public function getAttend($id){
-        if(Attend::where('id', $id)->where('available', true)->exists()){
+        if(Student_attendee::where('class_id', $id)->exists()){
             $attendee = Student_attendee::where('class_id', $id)->get();
         }
         else{
