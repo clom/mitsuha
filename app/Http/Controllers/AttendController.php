@@ -82,4 +82,14 @@ class AttendController extends Controller
         return response()->json($attendee);
     }
 
+    public function getAttendOrderStudentID($id){
+        if(Student_attendee::where('class_id', $id)->exists()){
+            $attendee = Student_attendee::where('class_id', $id)->orderBy('student_id', 'asc')->get();
+        }
+        else{
+            return abort(404, 'Not Found');
+        }
+        return response()->json($attendee);
+    }
+
 }

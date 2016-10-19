@@ -21,7 +21,7 @@
                 @endif
 
             </div>
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered sortable-theme-bootstrap" data-sortable>
                 <thead>
                 <tr>
                     <th>学生番号</th>
@@ -41,7 +41,7 @@
         function getAttendee() {
             $.ajax({
                 type: 'get',
-                url: '/get/attend/{{$data->id}}',
+                url: '/get/attend/order/{{$data->id}}',
                 dataType: 'json',
                 success: function (data) {
                     var attend_table = '';
@@ -53,7 +53,7 @@
             });
         }
 
-        setInterval('getAttendee()', 1000);
+        //setInterval('getAttendee()', 1000);
 
     </script>
 @endsection
