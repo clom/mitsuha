@@ -19,7 +19,7 @@
                 @else
                     <h4>ステータス: 無効</h4>
                 @endif
-
+                <button onclick="getAttendee()" class="btn btn-default">更新</button>
             </div>
             <table class="table table-striped table-bordered sortable-theme-bootstrap" data-sortable>
                 <thead>
@@ -38,6 +38,7 @@
 </div>
 
     <script>
+        getAttendee();
         function getAttendee() {
             $.ajax({
                 type: 'get',
