@@ -19,6 +19,7 @@
                 @else
                     <h4>ステータス: 無効</h4>
                 @endif
+                <h4>出席者数: <span id="attendCount"></span></h4>
                 <button onclick="getAttendee()" class="btn btn-default">更新</button>
             </div>
             <table class="table table-striped table-bordered sortable-theme-bootstrap" data-sortable>
@@ -52,7 +53,16 @@
                     });
                 }
             });
+            $.ajax({
+                type: 'get',
+                url: '/get/attend/count/{{$data->id}}',
+                dataType: 'json',
+                success: function (data) {
+                        $('#attendCount').text(data + '人');
+                }
+            });
         }
+
 
         //setInterval('getAttendee()', 1000);
 

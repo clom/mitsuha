@@ -92,4 +92,14 @@ class AttendController extends Controller
         return response()->json($attendee);
     }
 
+    public function getAttendCount($id){
+        if(Student_attendee::where('class_id', $id)->exists()){
+            $attendee = Student_attendee::where('class_id', $id)->count();
+        }
+        else{
+            return abort(404, 'Not Found');
+        }
+        return response()->json($attendee);
+    }
+
 }
