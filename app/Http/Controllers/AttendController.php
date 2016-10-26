@@ -72,6 +72,17 @@ class AttendController extends Controller
         return redirect('/attend/'.$req->input('class_id'));
     }
 
+    public function register2(Requests\AttendeeRequest $req){
+        $attend = new Student_attendee();
+        $attend->setStudentId($req->input('student_id'));
+        $attend->setClassId($req->input('class_id'));
+        $attend->setStudentname($req->input('student_name'));
+        $attend->setSession($req->input('session_code'));
+        $attend->save();
+        return response()->json([], 200);
+    }
+
+
     public function getAttend($id){
         if(Student_attendee::where('class_id', $id)->exists()){
             $attendee = Student_attendee::where('class_id', $id)->get();

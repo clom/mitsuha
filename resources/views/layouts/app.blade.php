@@ -14,6 +14,9 @@
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/sortable.min.js"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -93,6 +96,5 @@
     @yield('content')
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
 </body>
 </html>

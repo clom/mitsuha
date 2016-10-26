@@ -13,13 +13,12 @@
                     <hr>
                     <h2>情報</h2>
                     <h4>科目名: {{$data->name}}</h4>
+                    <div id="attend">
                     @if(!$flag)
-                        {!! Form::open(['action' => 'AttendController@register', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['action' => 'AttendController@register2', 'class' => 'form-horizontal', 'id'=>'class_submit']) !!}
                         学生番号 {{ Form::text('student_id', old('student_id'),[ 'class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '学生番号']) }}
                         <br>
                         名前 {{ Form::text('student_name', old('student_name'),[ 'class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '名前']) }}
-                        <br>
-                        キーワード {{ Form::text('keyword', old('keyword'),[ 'class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => 'キーワード' ]) }}
                         <br>
                         {{Form::hidden('session_code', $st_code)}}
                         {{Form::hidden('class_id', $data->id)}}
@@ -28,6 +27,7 @@
                     @else
                         <h2>既に登録完了しています。</h2>
                     @endif
+                    </div>
 
 
                 </div>
@@ -48,4 +48,56 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#class_submit').submit(function (event) {
+                // HTMLでの送信をキャンセル
+                event.preventDefault();
+
+                // 操作対象のフォーム要素を取得
+                var $form = $(this);
+
+                // 送信ボタンを取得
+                // （後で使う: 二重送信を防止する。）
+                var $button = $form.find('button');
+                // 送信
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: $form.attr('method'),
+                    dataType: 'json',
+                    data: $form.serializeArray(),
+                    timeout: 10000,  // 単位はミリ秒
+
+                    // 送信前
+                    beforeSend: function (xhr, settings) {
+                        // ボタンを無効化し、二重送信を防止
+                        $button.attr('disabled', true);
+                    },
+                    // 応答後
+                    complete: function (xhr, textStatus) {
+                        // ボタンを有効化し、再送信を許可
+                        $button.attr('disabled', false);
+                    },
+
+                    // 通信成功時の処理
+                    success: function (result, textStatus, xhr) {
+                        alert('出席登録しました。');
+                        $('#attend').html('<h2>既に登録完了しています。</h2>');
+                    },
+
+                    // 通信失敗時の処理
+                    error: function (xhr, textStatus, error) {
+                        alert('出席登録に失敗しました。学生番号と名前を正しく入力してください。');
+                    }
+                });
+            });
+        });
+
+    </script>
 @endsection

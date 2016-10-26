@@ -24,9 +24,8 @@ class AttendeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id'=>'required',
-            'student_name'=>'required',
-            'keyword'=>'required'
+            'student_id'=>'required | digits:8',
+            'student_name'=>'required'
         ];
     }
 }
