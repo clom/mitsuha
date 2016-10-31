@@ -87,8 +87,8 @@
 
                     // 通信成功時の処理
                     success: function (result, textStatus, xhr) {
-                        alert('出席登録しました。');
                         $('#attend').html('<h2>既に登録完了しています。</h2>');
+                        alert('出席登録しました。');
                     },
 
                     // 通信失敗時の処理
