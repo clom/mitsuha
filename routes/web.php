@@ -26,6 +26,9 @@ Route::get('/admin', 'AdminController@dashboard');
 Route::get('/admin/attend', 'AdminController@addAttend');
 Route::get('/admin/view/{id}', 'AdminController@viewAttend');
 Route::get('/admin/view', 'AdminController@ListAttend');
+Route::get('/admin/userdata', 'AdminController@getUserdata');
+Route::get('/admin/user', 'AdminController@AdminUser');
+Route::get('/admin/user/change/{id}', 'AdminController@changeAPI');
 
 // admin api
 Route::post('/admin/attend/add', 'AdminController@add');

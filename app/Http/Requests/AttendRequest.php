@@ -26,7 +26,6 @@ class AttendRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'keyword'=>'required'
         ];
     }
 }

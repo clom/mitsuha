@@ -63,6 +63,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/admin/attend') }}">Add Attend</a></li>
                     <li><a href="{{ url('/admin/view') }}">View Attendee</a></li>
+                    <li><a href="{{ url('/admin/user') }}">User Information</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
