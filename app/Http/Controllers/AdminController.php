@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Attend;
 use App\Student_attendee;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +35,7 @@ class AdminController extends Controller
     public function add(Requests\AttendRequest $req){
         $attend = new Attend();
         $attend->setName($req->input('name'));
-        $attend->setKeyword($req->input('keyword'));
+        $attend->setKeyword('disable');
         $attend->setUserid(Auth::user()->id);
         if($req->input('available') == 'on')
             $attend->setIsavailable(1);
@@ -68,6 +69,26 @@ class AdminController extends Controller
         $attend = Attend::all();
         return view('admin.list', ['data' => $attend]);
 
+    }
+
+    public function AdminUser(){
+        return view('admin.user');
+    }
+
+    public function getUserdata(){
+        $user = User::all();
+        return response()->json($user);
+    }
+
+    public function changeAPI($id){
+        $data = User::find($id)->get();
+        foreach ($data as $user) {
+            if(!$user->is_admin)
+                User::find($id)->update(['is_admin' => 1]);
+            else
+                User::find($id)->update(['is_admin' => 0]);
+        }
+        return response()->json('ok');
     }
 
 }
