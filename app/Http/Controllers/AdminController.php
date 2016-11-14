@@ -89,7 +89,7 @@ class AdminController extends Controller
             User::where('id', $id)->update(['is_admin' => 0]);
             $msg = "Update NonAdmin";
         }
-        return response()->json($user);
+        return response()->json($msg);
     }
 
 }
