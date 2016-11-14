@@ -81,14 +81,15 @@ class AdminController extends Controller
     }
 
     public function changeAPI($id){
-        $data = User::find($id)->get();
-        foreach ($data as $user) {
-            if(!$user->is_admin)
-                User::find($id)->update(['is_admin' => 1]);
-            else
-                User::find($id)->update(['is_admin' => 0]);
+        $user = User::where('id', $id)->first();
+        if(!$user->checkAdmin()) {
+            User::where('id', $id)->update(['is_admin' => 1]);
+            $msg = "Update Admin";
+        } else {
+            User::where('id', $id)->update(['is_admin' => 0]);
+            $msg = "Update NonAdmin";
         }
-        return response()->json('ok');
+        return response()->json($user);
     }
 
 }
