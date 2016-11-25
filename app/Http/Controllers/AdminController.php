@@ -92,4 +92,20 @@ class AdminController extends Controller
         return response()->json($msg);
     }
 
+    public function EditAttendee($id){
+        $attend = Student_attendee::find($id);
+        return response()->json($attend);
+    }
+
+    public function updateAttendee(Requests\AttendeeRequest $req, $id){
+        $attend = Student_attendee::find($id);
+        if(empty($attend))
+            return abort(404, []);
+        $attend->setStudentId($req->input('student_id'));
+        $attend->setStudentname($req->input('student_name'));
+        $attend->save();
+
+        return response()->json([],204);
+    }
+
 }
