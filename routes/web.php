@@ -33,10 +33,13 @@ Route::get('/admin/user/change/{id}', 'AdminController@changeAPI');
 // admin api
 Route::post('/admin/attend/add', 'AdminController@add');
 Route::post('/admin/available', 'AdminController@available');
+Route::post('/admin/attendee/edit/{id}', 'AdminController@updateAttendee');
 //Route::post('/attend/check', 'AttendController@register');
 Route::post('/attend/check2', 'AttendController@register2');
 Route::get('/get/attend/{id}', 'AttendController@getAttend');
 Route::get('/get/attend/order/{id}', 'AttendController@getAttendOrderStudentID');
 Route::get('/get/attend/count/{id}', 'AttendController@getAttendCount');
+Route::get('/get/attendee/edit/{id}', 'AdminController@EditAttendee');
+
 
 
