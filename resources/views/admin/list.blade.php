@@ -14,7 +14,6 @@
                     <tr>
                         <th>id</th>
                         <th>科目名</th>
-                        <th>キーワード</th>
                         <th>有効化</th>
                         <th>作成日時</th>
                         <th>アクション</th>
@@ -23,7 +22,6 @@
                         <tr>
                             <td>{{ $row->id }}</td>
                             <td>{{ $row->name }}</td>
-                            <td>{{ $row->keyword }}</td>
                             @if($row->available)
                                 <td>有効</td>
                             @else
